@@ -49,7 +49,7 @@ export const devRouter = createTRPCRouter({
     });
 
     if (existingProfile) {
-      throw new Error("Developer profile already exists.");
+      return null
     }
 
     // Create a new developer profile
