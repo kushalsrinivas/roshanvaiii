@@ -96,35 +96,39 @@ export default function DashboardMain({ userId }: GetStartedProps) {
         </div>
 
         <TabsContent value="developer">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {founderProjects.map((project) => (
-              <Card key={project.id}>
-                <CardHeader>
-                  <CardTitle>{project.startupName}</CardTitle>
-                  <CardDescription>
-                    <div className="mt-2 flex items-center">
-                      <span>{project.stage}</span>
+          {founderProjects.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {founderProjects.map((project) => (
+                <Card key={project.id}>
+                  <CardHeader>
+                    <CardTitle>{project.startupName}</CardTitle>
+                    <CardDescription>
+                      <div className="mt-2 flex items-center">
+                        <span>{project.stage}</span>
+                      </div>
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-2">{project.description}</p>
+                    <div className="mb-2 flex flex-wrap gap-2">
+                      {project.requirements}
                     </div>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-2">{project.description}</p>
-                  <div className="mb-2 flex flex-wrap gap-2">
-                    {project.requirements}
-                  </div>
-                  <p className="font-semibold">Budget: {project.budget}</p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <Button onClick={() => handleApply(project)}>
-                      Apply Now
-                    </Button>
-                    <Button variant="outline" size="icon">
-                      <MessageSquare className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <p className="font-semibold">Budget: {project.budget}</p>
+                    <div className="mt-4 flex items-center justify-between">
+                      <Button onClick={() => handleApply(project)}>
+                        Apply Now
+                      </Button>
+                      <Button variant="outline" size="icon">
+                        <MessageSquare className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div>hahah</div>
+          )}
         </TabsContent>
 
         <TabsContent value="founder">
