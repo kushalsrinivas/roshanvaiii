@@ -23,7 +23,7 @@ export const founderRouter = createTRPCRouter({
       });
 
       if (!profile) {
-        throw new Error("Profile not found");
+        return null
       }
 
       return profile;
@@ -51,7 +51,7 @@ export const founderRouter = createTRPCRouter({
       });
 
       if (existingProfile) {
-        throw new Error("Founder profile already exists.");
+        return null
       }
 
       // Create the new profile

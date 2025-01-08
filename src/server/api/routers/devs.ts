@@ -15,7 +15,7 @@ export const devRouter = createTRPCRouter({
       });
 
       if (!profile) {
-        throw new Error("Profile not found");
+        return null
       }
 
       return profile;
