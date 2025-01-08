@@ -17,7 +17,61 @@ import { type AdapterAccount } from "next-auth/adapters";
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
 export const createTable = pgTableCreator((name) => `finderfo_${name}`);
+export const developerProfiles = createTable(
+  "developer_profiles",
+  {
+    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    userId: varchar("user_id", { length: 255 })
+      .notNull(),
+    userName : varchar("userName", {length :255}).notNull(),
 
+    skills: text("skills").array().notNull(), // Array of skills
+    experienceLevel: varchar("experience_level", { length: 50 }).notNull(),
+    githubLink: text("github_link").notNull(),
+    portfolioLinks: text("portfolio_links"), // Optional
+    availability: varchar("availability", { length: 50 }).notNull(),
+
+    createdById: varchar("created_by", { length: 255 })
+      .notNull()
+      .references(() => users.id), // Foreign key to users table
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date()
+    ),
+  }
+);
+
+
+export const founderProfiles = createTable(
+  "founder_profiles",
+  {
+    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    userId: varchar("user_id", { length: 255 })
+    .notNull(),
+    userName : varchar("userName", {length :255}).notNull(),
+    startupName: varchar("startup_name", { length: 255 }).notNull(),
+    description: text("description").notNull(),
+    stage: varchar("stage", { length: 50 }).notNull(), // E.g., "idea", "mvp", "seed", "series-a"
+    requirements: text("requirements").notNull(),
+    budget: varchar("budget", { length: 50 }).notNull(), // E.g., "low", "medium", "high"
+    pitchDeck: varchar("pitch_deck",{ length: 50 } ).notNull(), // Optional pitch deck or website link
+    createdById: varchar("created_by_id", { length: 255 })
+      .notNull()
+      .references(() => users.id), // Link to the authenticated user
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date()
+    ),
+  },
+  (table) => ({
+    startupNameIndex: index("startup_name_idx").on(table.startupName),
+    createdByIdIndex: index("created_by_id_idx").on(table.createdById),
+  })
+);
 export const posts = createTable(
   "post",
   {
