@@ -22,14 +22,16 @@ const GetStarted: React.FC<GetStartedProps> = ({ userId }) => {
     redirect("/dashboard");
   }
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
-      <h1 className="mb-8 text-3xl font-bold">What best describes you?</h1>
-      <div className="flex space-x-6">
-        <Card className="w-64">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
+      <h1 className="mb-8 text-center text-2xl font-bold sm:text-3xl">
+        What best describes you?
+      </h1>
+      <div className="flex flex-wrap justify-center gap-6">
+        <Card className="w-full max-w-sm sm:w-64">
           <CardHeader>
             <CardTitle>Developer</CardTitle>
             <CardDescription>
-              I$apos;m looking for exciting projects to work on
+              I&apos;m looking for exciting projects to work on
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -38,7 +40,7 @@ const GetStarted: React.FC<GetStartedProps> = ({ userId }) => {
             </Button>
           </CardContent>
         </Card>
-        <Card className="w-64">
+        <Card className="w-full max-w-sm sm:w-64">
           <CardHeader>
             <CardTitle>Founder</CardTitle>
             <CardDescription>

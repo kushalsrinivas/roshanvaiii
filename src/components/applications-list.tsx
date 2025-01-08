@@ -17,6 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { api } from "@/trpc/react";
+import Link from "next/link";
 
 // Define the types for projects, developers, and applications
 interface Project {
@@ -77,12 +78,14 @@ export function ApplicationsList({ userId }: ApplicationsListProps) {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <Avatar className="mr-2 h-10 w-10">
-                        <AvatarImage />
-                        <AvatarFallback>
-                          {application.developer.userName[0]}
-                        </AvatarFallback>
-                      </Avatar>
+                      <Link href={`/developer/${application.developer.userId}`}>
+                        <Avatar className="mr-2 h-10 w-10">
+                          <AvatarImage />
+                          <AvatarFallback>
+                            {application.developer.userName[0]}
+                          </AvatarFallback>
+                        </Avatar>
+                      </Link>
                       <div>
                         <CardTitle>{application.developer.userName}</CardTitle>
                         <CardDescription>
