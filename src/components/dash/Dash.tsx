@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { MessageSquare } from "lucide-react";
 
-import { ApplicationModal } from "@/components/application-modal";
+// import { ApplicationModal } from "@/components/application-modal";
 // import { ApplicationsList } from "@/components/applications-list";
 
 import { redirect } from "next/navigation";
@@ -45,31 +45,31 @@ export default function DashboardMain({ userId }: GetStartedProps) {
   );
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [applicationModalOpen, setApplicationModalOpen] = useState(false);
+//   const [applicationModalOpen, setApplicationModalOpen] = useState(false);
 
-  const [applications, setApplications] = useState<
-    { projectId: number; developerId: number; coverLetter: string }[]
-  >([]);
+//   const [applications, setApplications] = useState<
+//     { projectId: number; developerId: number; coverLetter: string }[]
+//   >([]);
 
   const { data: founderProjects = [] } = api.founder.getAll.useQuery();
   const { data: devs = [] } = api.dev.getAll.useQuery();
-  const [selectedProject, setSelectedProject] = useState<FounderProfile>();
+//   const [selectedProject, setSelectedProject] = useState<FounderProfile>();
 
-  const handleApply = (project: FounderProfile) => {
-    setSelectedProject(project);
-    setApplicationModalOpen(true);
-  };
+//   //   const handleApply = (project: FounderProfile) => {
+//   //     setSelectedProject(project);
+//   //     setApplicationModalOpen(true);
+//   //   };
 
-  const handleSubmitApplication = (coverLetter: string) => {
-    if (selectedProject) {
-      const newApplication = {
-        projectId: selectedProject.id,
-        developerId: 1, // Assuming the current user is the first developer
-        coverLetter,
-      };
-      setApplications([...applications, newApplication]);
-    }
-  };
+//   const handleSubmitApplication = (coverLetter: string) => {
+//     if (selectedProject) {
+//       const newApplication = {
+//         projectId: selectedProject.id,
+//         developerId: 1, // Assuming the current user is the first developer
+//         coverLetter,
+//       };
+//       setApplications([...applications, newApplication]);
+//     }
+//   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -115,9 +115,10 @@ export default function DashboardMain({ userId }: GetStartedProps) {
                     </div>
                     <p className="font-semibold">Budget: {project.budget}</p>
                     <div className="mt-4 flex items-center justify-between">
-                      <Button onClick={() => handleApply(project)}>
+                      {/* <Button onClick={() => handleApply(project)}>
                         Apply Now
-                      </Button>
+                      </Button> */}
+                      <Button>Apply Now</Button>
                       <Button variant="outline" size="icon">
                         <MessageSquare className="h-4 w-4" />
                       </Button>
@@ -183,13 +184,13 @@ export default function DashboardMain({ userId }: GetStartedProps) {
         </TabsContent>
       </Tabs>
 
-      <ApplicationModal
+      {/* <ApplicationModal
         isOpen={applicationModalOpen}
         onClose={() => setApplicationModalOpen(false)}
         onSubmit={handleSubmitApplication}
         userId={userId}
         project={selectedProject!}
-      />
+      /> */}
     </div>
   );
 }
