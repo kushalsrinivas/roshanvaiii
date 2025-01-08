@@ -133,47 +133,51 @@ export default function DashboardMain({ userId }: GetStartedProps) {
 
         <TabsContent value="founder">
           <div className="space-y-8">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {devs.map((dev) => (
-                <Card key={dev.id}>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Avatar className="mr-2 h-10 w-10">
-                          <AvatarFallback>{dev.userName}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <CardTitle>{dev.userName}</CardTitle>
-                          <CardDescription>
-                            {dev.experienceLevel} experience
-                          </CardDescription>
+            {devs.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {devs.map((dev) => (
+                  <Card key={dev.id}>
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Avatar className="mr-2 h-10 w-10">
+                            <AvatarFallback>{dev.userName}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <CardTitle>{dev.userName}</CardTitle>
+                            <CardDescription>
+                              {dev.experienceLevel} experience
+                            </CardDescription>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="mb-2 flex flex-wrap gap-2">
-                      {dev.skills.map((skill) => (
-                        <Badge key={skill} variant="secondary">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                    <p>Availability: {dev.availability}</p>
-                    <div className="mt-4 flex items-center justify-between">
-                      <Button asChild>
-                        <Link href={`/developer/${dev.userId}`}>
-                          View Profile
-                        </Link>
-                      </Button>
-                      <Button variant="outline" size="icon">
-                        <MessageSquare className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="mb-2 flex flex-wrap gap-2">
+                        {dev.skills.map((skill) => (
+                          <Badge key={skill} variant="secondary">
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                      <p>Availability: {dev.availability}</p>
+                      <div className="mt-4 flex items-center justify-between">
+                        <Button asChild>
+                          <Link href={`/developer/${dev.userId}`}>
+                            View Profile
+                          </Link>
+                        </Button>
+                        <Button variant="outline" size="icon">
+                          <MessageSquare className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div>hahah</div>
+            )}
             {/* <ApplicationsList userId={userId} /> */}
           </div>
         </TabsContent>
