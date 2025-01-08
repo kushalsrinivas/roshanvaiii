@@ -72,6 +72,22 @@ export const founderProfiles = createTable(
     createdByIdIndex: index("created_by_id_idx").on(table.createdById),
   })
 );
+
+export const applications = createTable("applications", {  
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  projectId: varchar("project_id", { length: 255 })
+  .notNull(),
+  developerId: varchar("developer_id", { length: 255 })
+  .notNull(),
+  coverLetter: text("cover_letter").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date()
+  ),
+}); 
+
 export const posts = createTable(
   "post",
   {
